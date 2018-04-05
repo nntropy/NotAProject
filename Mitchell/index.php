@@ -1,20 +1,8 @@
 <?php
+require("C:\Users\aidanocc\Mitchell\Controller\RestaurantController.php");
 $title = "Home";
+$restaurantController = new RestaurantController();
 $sidebar = "testing";
-$content = '
-        <h3>FOod</h3>
-        <p>
-            Nice
-        </p>
-
-        <h3>Bunk</h3>
-        <p>
-            Ok
-         </p>
-
-         <h3>Nop</h3>
-         <p>
-            Yaaaa
-         </p>';
+$content = $restaurantController->CreateRestaurantDropdownList();
 include 'Template.php';
 ?>
