@@ -1,29 +1,46 @@
 <?php
 require('C:\Users\aidanocc\Mitchell\Model\RestaurantModel.php');
-
 class RestaurantController{
     
     
     function CreateRestaurantDropdownList() {
         $restaurantModel = new RestaurantModel();
-        $result = "<form action = '' method = 'post' width = '200px'
+        if (isset($_POST['types'])) {
+            if ($_POST['types'] == 'All') {
+                $allSelected = 'selected';
+                $selected = '';
+            } else {
+                $selected = $_POST['types'];
+                $allSelected = '';
+            }
+        }
+        else {
+            $allSelected = 'selected';
+            $selected = '';
+        }
+
+        $result = "<form action = '' method='POST'>
                     Please select a type:
-                    <select name = 'types' >
-                        <option value = '%' >All</option>
-                        ".$this->CreateOptionValues($restaurantModel->GetRestaurantTypes()).
+                    <select name = 'types'>
+                        <option value = '%' " . $allSelected . ">All</option>
+                         " . $this->CreateOptionValues($restaurantModel->GetRestaurantTypes(), $selected) .
                         "</select>
                         <input type = 'submit' value = 'Search' />
-                        </form>";
+                    </form>";
         return $result;
     }
     
-    function CreateOptionValues(array $valueArray) {
+    function CreateOptionValues(array $valueArray, $selected) {
         $result = "";
         
         foreach ($valueArray as $value) {
-            $result = $result . "<option value = '$value'>$value</option>";
+            if($selected == $value) {
+                $result = $result . "<label for = '$value' selected>$value</option>";
+            }
+            else {
+                $result = $result . "<label for = '$value'>$value</option>";
+            }
         }
-        
         return $result;
     }
     
@@ -33,25 +50,28 @@ class RestaurantController{
         $result = "";
         
         //Generate a restaurantTable for each restaurantEntity in array
-        foreach ($restaurantArray as $key => $restuarant){
-            $result = $result . 
+        foreach ($restaurantArray as $key => $restaurant){
+            $result = $result .
             "<table class = 'restaurantTable'>
                         <tr>
                             <th width = '75px' >Name: </th>
-                            <td>$restuarant->aname</td>
+                            <td>$restaurant->ANAME</td>
                         </tr>
-                        
                         <tr>
                             <th>Type: </th>
-                            <td>$restuarant->atype</td>
+                            <td>$restaurant->ATYPE</td>
                         </tr>
                         
                         <tr>
                             <th>URL: </th>
-                            <td>$restuarant->url</td>
+                            <td>$restaurant->URL</td>
                         </tr>
+                        <tr>=
+</td>
+</tr>
                      </table>";
         }
+        return $result;
     }
 }
 ?>

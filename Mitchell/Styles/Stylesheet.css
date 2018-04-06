@@ -165,7 +165,7 @@ input[type="password"], input[type="text"] {
     color: #3b3b3b
 }
 
-input[type="submit"] {
+input[id="login"] {
     width:240px;
     height:35px;
     display:block;
@@ -174,17 +174,17 @@ input[type="submit"] {
     font-weight:bold;
     color:#fff;
     text-align:center;
-    text-shadow:1px 1px 0px #37a69b;
+    text-shadow:1px 1px 0 #37a69b;
     padding-top:6px;
     margin: 29px 0 0 29px;
     position:relative;
     cursor:pointer;
     border: none;
     background-color: #37a69b;
-    box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #497a78, 0px 10px 5px #999;
+    box-shadow: inset 0 1px 0 #2ab7ec, 0 5px 0 0 #497a78, 0 10px 5px #999;
 }
 
-input[type="submit"]:hover {
+input[id="login"]:hover {
     color: #d4dae0;
 }
 
@@ -200,9 +200,9 @@ input[type="submit"]:hover {
 }
 
 
-input[type="submit"]:active {
+input[id="login"]:active {
     top:3px;
-    box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #31524d, 0px 5px 3px #999;
+    box-shadow: inset 0 1px 0 #2ab7ec, 0 2px 0 0 #31524d, 0 5px 3px #999;
 }
 
 
@@ -266,23 +266,31 @@ button[id="cAccount"] {
     padding: 0;
     padding-right: 20px;
 }
-button[id=cLogin] {
-    background-color: Transparent;
-    background-repeat:no-repeat;
-    border: none;
-    cursor:pointer;
-    overflow: hidden;
-    outline:none;
-    font-size: 16px;
-    float: right;
-    position: relative;
-    width: 180px;
-    height: 60px;
+
+.restaurantTable {
     display: block;
-    color: black;
-    text-align: center;
-    text-decoration: none;
-    margin: 0;
-    padding: 0;
-    padding-right: 20px;
+    float: left;
+    width: 750px;
+    height: 250px;
+    margin: 10px 10px 10px 0;
+    border: 3px solid #E3E3E3;
+    border-radius: 10px;
+}
+
+.restaurantTable tr th, .restaurantTable tr td{
+    text-align: left;
+    padding: 0 5px 0 5px;
+}
+
+.inputField
+{
+    width: 280px;
+    padding: 4px;
+}
+
+label
+{
+    float: left;
+    width: 100px;
+    font-weight: bold;
 }

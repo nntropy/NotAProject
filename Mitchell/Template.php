@@ -18,7 +18,6 @@
             <li><a href="profile.php">Profile</a></li>
             <!-- Trigger/Open The Modal -->
             <li><button id="cAccount">Create Account</button></li>
-            <li><button id="cLogin">Login</Button></li>
             <!-- The Modal -->
             <div id="myModal" class="modal">
                 <div class="createAccount">
@@ -27,7 +26,7 @@
                     <input type="password" placeholder="password" id="password">
                     <a href="#" class="create">create an account</a>
                     <a href="#" class="forgot">forgot password?</a>
-                    <input type="submit" id="submit" value="Sign In">
+                    <input type="submit" id="login" value="Sign In">
                 </div>
             </div>
         </ul>
@@ -57,7 +56,7 @@
     var span = document.getElementsByClassName("close")[0];
 
     // Get the submit button
-    var submit = document.getElementById('submit');
+    var submit = document.getElementById('login');
 
     // When the user clicks the button, open the modal
     cAccount.onclick = function() {

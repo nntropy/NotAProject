@@ -41,12 +41,11 @@ class RestaurantModel {
         $RestaurantArray = array();
 
         while($row = pg_fetch_array($result)) {
-            $RESTAURANT_ID = $row[1];
-            $ANAME = $row[2];
-            $ATYPE = $row[3];
-            $URL = $row[4];
+            $ANAME = $row[1];
+            $ATYPE = $row[2];
+            $URL = $row[3];
 
-            $RESTAURANT = new RestaurantEntity(-1 , $RESTAURANT_ID, $ANAME, $ATYPE, $URL);
+            $RESTAURANT = new RestaurantEntity(-1, $ANAME, $ATYPE, $URL);
 
             array_push($RestaurantArray, $RESTAURANT);
         }

@@ -7,7 +7,7 @@ class RestaurantEntity
     public $ATYPE;
     public $URL;
     
-    function _construct($RESTAURANT_ID, $ANAME, $ATYPE, $URL) {
+    function RestaurantEntity($RESTAURANT_ID, $ANAME, $ATYPE, $URL) {
         $this-> RESTAURANT_ID = $RESTAURANT_ID;
         $this-> ANAME = $ANAME;
         $this-> ATYPE = $ATYPE;

@@ -8,18 +8,18 @@ class RatingEntity
     public $FOOD;
     public $MOOD;
     public $STAFF;
-    public $COMMENTS;
+    public $ACOMMENT;
     public $RESTAURANT_ID;
     
     
-    function _construct($AUSER_ID, $ADATE, $PRICE, $FOOD, $MOOD, $STAFF,$COMMENTS, $RESTAURANT_ID) {
+    function _construct($AUSER_ID, $ADATE, $PRICE, $FOOD, $MOOD, $STAFF,$ACOMMENT, $RESTAURANT_ID) {
         $this-> AUSER_ID = $AUSER_ID;
         $this-> ADATE = $ADATE;
         $this-> PRICE = $PRICE;
         $this-> FOOD = $FOOD;
         $this-> MOOD = $MOOD;
         $this-> STAFF = $STAFF;
-        $this-> COMMENTS = $COMMENTS;
+        $this-> ACOMMENT = $ACOMMENT;
         $this-> RESTAURANT_ID = $RESTAURANT_ID;
     }
     
