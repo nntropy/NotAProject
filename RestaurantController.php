@@ -119,9 +119,432 @@ class RestaurantController{
                             <td>$returnEntity->val11</td>
                         </tr>
                      </table>";
+                }
         }
-    }
-}
+
+        function CreateQueryB($names) {
+        $restaurantModel = new RestaurantModel();
+        $returnEntityArray = $restaurantModel->GetQueryB($names);
+        $result = "";
+        
+        //Generate a restaurantTable for each restaurantEntity in array
+        foreach ($returnEntityArray as $key => $returnEntity){
+            $result = $result .
+            "<table class = 'Restaurant Menu'>
+                        <tr>
+                            <th width = '75px' >Name: </th>
+                            <td>$returnEntity->val1</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Category: </th>
+                            <td>$returnEntity->val2</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Price: </th>
+                            <td>$returnEntity->val3</td>
+                        </tr>
+    
+                     </table>";
+                }
+        }
+
+        function CreateQueryC($categories) {
+        $restaurantModel = new RestaurantModel();
+        $returnEntityArray = $restaurantModel->GetQueryC($categories);
+        $result = "";
+        
+        //Generate a restaurantTable for each restaurantEntity in array
+        foreach ($returnEntityArray as $key => $returnEntity){
+            $result = $result .
+            "<table class = 'Managers and Opening Dates'>
+                        <tr>
+                            <th width = '75px' >Manager Name: </th>
+                            <td>$returnEntity->val1</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Opening Date: </th>
+                            <td>$returnEntity->val2</td>
+                        </tr>
+    
+                     </table>";
+            }
+        }
+
+        function CreateQueryD($categories) {
+        $restaurantModel = new RestaurantModel();
+        $returnEntityArray = $restaurantModel->GetQueryD($categories);
+        $result = "";
+        
+        //Generate a restaurantTable for each restaurantEntity in array
+        foreach ($returnEntityArray as $key => $returnEntity){
+            $result = $result .
+            "<table class = 'Most Expensive Menu Item'>
+                        <tr>
+                            <th width = '75px' >Name: </th>
+                            <td>$returnEntity->val1</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Price: </th>
+                            <td>$returnEntity->val2</td>
+                        </tr>
+
+                        <tr>
+                            <th>Manager Name: </th>
+                            <td>$returnEntity->val3</td>
+                        </tr>
+
+                        <tr>
+                            <th>Opening Hour: </th>
+                            <td>$returnEntity->val4</td>
+                        </tr>
+
+                        <tr>
+                            <th>URL: </th>
+                            <td>$returnEntity->val5</td>
+                        </tr>
+    
+                     </table>";
+                }
+        }
+
+        function CreateQueryE() {
+        $restaurantModel = new RestaurantModel();
+        $returnEntityArray = $restaurantModel->GetQueryE();
+        $result = "";
+        
+        //Generate a restaurantTable for each restaurantEntity in array
+        foreach ($returnEntityArray as $key => $returnEntity){
+            $result = $result .
+            "<table class = 'Average prices per category'>
+                        <tr>
+                            <th width = '75px' >Type: </th>
+                            <td>$returnEntity->val1</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Category: </th>
+                            <td>$returnEntity->val2</td>
+                        </tr>
+
+                        <tr>
+                            <th>Average Price: </th>
+                            <td>$returnEntity->val3</td>
+                        </tr>
+
+    
+                     </table>";
+                }
+        }
+
+        function CreateQueryF() {
+        $restaurantModel = new RestaurantModel();
+        $returnEntityArray = $restaurantModel->GetQueryF();
+        $result = "";
+        
+        //Generate a restaurantTable for each restaurantEntity in array
+        foreach ($returnEntityArray as $key => $returnEntity){
+            $result = $result .
+            "<table class = 'Number of ratings per restaurant'>
+                        <tr>
+                            <th width = '75px' >Restaurant Name: </th>
+                            <td>$returnEntity->val1</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Restaurant ID: </th>
+                            <td>$returnEntity->val2</td>
+                        </tr>
+
+                        <tr>
+                            <th>Rater Name: </th>
+                            <td>$returnEntity->val3</td>
+                        </tr>
+
+                        <tr>
+                            <th>Rater ID: </th>
+                            <td>$returnEntity->val4</td>
+                        </tr>
+
+                        <tr>
+                            <th>Price Rating: </th>
+                            <td>$returnEntity->val5</td>
+                        </tr>
+
+                        <tr>
+                            <th>Food Rating: </th>
+                            <td>$returnEntity->val6</td>
+                        </tr>
+
+                        <tr>
+                            <th>Mood Rating: </th>
+                            <td>$returnEntity->val7</td>
+                        </tr>
+
+                        <tr>
+                            <th>Staff Rating: </th>
+                            <td>$returnEntity->val8</td>
+                        </tr>
+
+
+    
+                     </table>";
+            }
+        }
+
+        function CreateQueryG() {
+        $restaurantModel = new RestaurantModel();
+        $returnEntityArray = $restaurantModel->GetQueryG();
+        $result = "";
+        
+        //Generate a restaurantTable for each restaurantEntity in array
+        foreach ($returnEntityArray as $key => $returnEntity){
+            $result = $result .
+            "<table class = 'Restaurants not rated in January 2015'>
+                        <tr>
+                            <th width = '75px' >Restaurant Name: </th>
+                            <td>$returnEntity->val1</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Location Phone Number: </th>
+                            <td>$returnEntity->val2</td>
+                        </tr>
+
+                        <tr>
+                            <th>Type: </th>
+                            <td>$returnEntity->val3</td>
+                        </tr>
+
+    
+                     </table>";
+            }
+        }
+
+        function CreateQueryH() {
+        $restaurantModel = new RestaurantModel();
+        $returnEntityArray = $restaurantModel->GetQueryH();
+        $result = "";
+        
+        //Generate a restaurantTable for each restaurantEntity in array
+        foreach ($returnEntityArray as $key => $returnEntity){
+            $result = $result .
+            "<table class = 'Staff rating lower than those given by Kendal Sawyer'>
+                        <tr>
+                            <th width = '75px' >Restaurant Name: </th>
+                            <td>$returnEntity->val1</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Location Opening Date: </th>
+                            <td>$returnEntity->val2</td>
+                        </tr>
+
+                        <tr>
+                            <th>Date of Rating: </th>
+                            <td>$returnEntity->val3</td>
+                        </tr>
+
+    
+                     </table>";
+            }
+        }
+
+        function CreateQueryI() {
+        $restaurantModel = new RestaurantModel();
+        $returnEntityArray = $restaurantModel->GetQueryI();
+        $result = "";
+        
+        //Generate a restaurantTable for each restaurantEntity in array
+        foreach ($returnEntityArray as $key => $returnEntity){
+            $result = $result .
+            "<table class = 'Thai restaurants with the highest food rating'>
+                        <tr>
+                            <th width = '75px' >Restaurant Name: </th>
+                            <td>$returnEntity->val1</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Rater Name: </th>
+                            <td>$returnEntity->val2</td>
+                        </tr>
+
+    
+                     </table>";
+            }
+        }
+
+
+        function CreateQueryJ() {
+        $restaurantModel = new RestaurantModel();
+        $returnEntityArray = $restaurantModel->GetQueryJ();
+        $result = "";
+        
+        //Generate a restaurantTable for each restaurantEntity in array
+        foreach ($returnEntityArray as $key => $returnEntity){
+            $result = $result .
+            "<table class = 'Are Thai restaurants more popular than other restaurants?'>
+                        <tr>
+                            <th width = '75px' >Result: </th>
+                            <td>$returnEntity->val1</td>
+                        </tr>
+                        
+    
+                     </table>";
+            }
+        }
+
+        function CreateQueryK() {
+        $restaurantModel = new RestaurantModel();
+        $returnEntityArray = $restaurantModel->GetQueryK();
+        $result = "";
+        
+        //Generate a restaurantTable for each restaurantEntity in array
+        foreach ($returnEntityArray as $key => $returnEntity){
+            $result = $result .
+            "<table class = 'Raters with the highest overall food and mood ratings'>
+                        <tr>
+                            <th width = '75px' >Rater Name: </th>
+                            <td>$returnEntity->val1</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Rater Join Date: </th>
+                            <td>$returnEntity->val2</td>
+                        </tr>
+
+                        <tr>
+                            <th>Rater Reputation: </th>
+                            <td>$returnEntity->val3</td>
+                        </tr>
+
+                        <tr>
+                            <th>Restaurant Name: </th>
+                            <td>$returnEntity->val4</td>
+                        </tr>
+
+                        <tr>
+                            <th>Date Rated: </th>
+                            <td>$returnEntity->val5</td>
+                        </tr>
+
+                        <tr>
+                            <th>Food and Mood combined rating: </th>
+                            <td>$returnEntity->val6</td>
+                        </tr>
+
+    
+                     </table>";
+            }
+        }
+
+        function CreateQueryN() {
+        $restaurantModel = new RestaurantModel();
+        $returnEntityArray = $restaurantModel->GetQueryN();
+        $result = "";
+        
+        //X.ANAME, X.EMAIL, r_id2, total_rating_2, avg_rating
+        //Generate a restaurantTable for each restaurantEntity in array
+        foreach ($returnEntityArray as $key => $returnEntity){
+            $result = $result .
+            "<table class = 'Raters with ratings lower than those of John'>
+                        <tr>
+                            <th width = '75px' >Rater Name: </th>
+                            <td>$returnEntity->val1</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Rater Email: </th>
+                            <td>$returnEntity->val2</td>
+                        </tr>
+
+                        <tr>
+                            <th>Rater ID: </th>
+                            <td>$returnEntity->val3</td>
+                        </tr>
+
+                        <tr>
+                            <th>Total Rating: </th>
+                            <td>$returnEntity->val4</td>
+                        </tr>
+
+                        <tr>
+                            <th>Average Rating: </th>
+                            <td>$returnEntity->val5</td>
+                        </tr>
+
+    
+                     </table>";
+            }
+        }
+
+        function CreateQueryO() {
+        $restaurantModel = new RestaurantModel();
+        $returnEntityArray = $restaurantModel->GetQueryO();
+        $result = "";
+        
+        //r_id, u_id, maximum_difference, O.ANAME, O.ATYPE, O.EMAIL, RE.ANAME, O.FOOD, O.MOOD, O.PRICE, O.STAFF 
+        //Generate a restaurantTable for each restaurantEntity in array
+        foreach ($returnEntityArray as $key => $returnEntity){
+            $result = $result .
+            "<table class = 'Raters with the most diverse ratings'>
+                        <tr>
+                            <th width = '75px' >Restaurant ID: </th>
+                            <td>$returnEntity->val1</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>User ID: </th>
+                            <td>$returnEntity->val2</td>
+                        </tr>
+
+                        <tr>
+                            <th>Maximum difference: </th>
+                            <td>$returnEntity->val3</td>
+                        </tr>
+
+                        <tr>
+                            <th>Rater Name: </th>
+                            <td>$returnEntity->val4</td>
+                        </tr>
+
+                        <tr>
+                            <th>Rater Type: </th>
+                            <td>$returnEntity->val5</td>
+                        </tr>
+
+                        <tr>
+                            <th>Restaurant Name: </th>
+                            <td>$returnEntity->val6</td>
+                        </tr>
+
+                        <tr>
+                            <th>Food Rating: </th>
+                            <td>$returnEntity->val7</td>
+                        </tr>
+
+                        <tr>
+                            <th>Mood Rating: </th>
+                            <td>$returnEntity->val8</td>
+                        </tr>
+
+                        <tr>
+                            <th>Price Rating: </th>
+                            <td>$returnEntity->val9</td>
+                        </tr>
+
+                        <tr>
+                            <th>Staff Rating: </th>
+                            <td>$returnEntity->val10</td>
+                        </tr>
+
+    
+                     </table>";
+            }
+        }
 ?>
 
 
