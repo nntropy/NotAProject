@@ -441,6 +441,99 @@ class RestaurantController{
                             <td>$returnEntity->val6</td>
                         </tr>
 
+                        <tr>
+                            <th>Food Rating: </th>
+                            <td>$returnEntity->val7</td>
+                        </tr>
+
+                        <tr>
+                            <th>Mood Rating: </th>
+                            <td>$returnEntity->val8</td>
+                        </tr>
+
+    
+                     </table>";
+            }
+        }
+
+        function CreateQueryL() {
+        $restaurantModel = new RestaurantModel();
+        $returnEntityArray = $restaurantModel->GetQueryL();
+        $result = "";
+        
+        //Generate a restaurantTable for each restaurantEntity in array
+        foreach ($returnEntityArray as $key => $returnEntity){
+            $result = $result .
+            "<table class = 'Raters with the highest overall food or mood ratings'>
+                        <tr>
+                            <th width = '75px' >Rater Name: </th>
+                            <td>$returnEntity->val1</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Rater Join Date: </th>
+                            <td>$returnEntity->val2</td>
+                        </tr>
+
+                        <tr>
+                            <th>Rater Reputation: </th>
+                            <td>$returnEntity->val3</td>
+                        </tr>
+
+                        <tr>
+                            <th>Restaurant Name: </th>
+                            <td>$returnEntity->val4</td>
+                        </tr>
+
+                        <tr>
+                            <th>Date Rated: </th>
+                            <td>$returnEntity->val5</td>
+                        </tr>
+
+                        <tr>
+                            <th>Food Rating: </th>
+                            <td>$returnEntity->val6</td>
+                        </tr>
+
+                        <tr>
+                            <th>Mood Rating: </th>
+                            <td>$returnEntity->val7</td>
+                        </tr>
+
+    
+                     </table>";
+            }
+        }
+
+        function CreateQueryM() {
+        $restaurantModel = new RestaurantModel();
+        $returnEntityArray = $restaurantModel->GetQueryM();
+        $result = "";
+        
+        //Generate a restaurantTable for each restaurantEntity in array
+        foreach ($returnEntityArray as $key => $returnEntity){
+            $result = $result .
+            "<table class = 'Raters that rated Little India Cafe most frequently'>
+                        <tr>
+                            <th width = '75px' >Number of Ratings: </th>
+                            <td>$returnEntity->val1</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Rater Name: </th>
+                            <td>$returnEntity->val2</td>
+                        </tr>
+
+                        <tr>
+                            <th>Rater Reputation: </th>
+                            <td>$returnEntity->val3</td>
+                        </tr>
+
+                        <tr>
+                            <th>Restaurant Name: </th>
+                            <td>$returnEntity->val4</td>
+                        </tr>
+
     
                      </table>";
             }
@@ -472,12 +565,12 @@ class RestaurantController{
                         </tr>
 
                         <tr>
-                            <th>Total Rating: </th>
+                            <th>User Rating: </th>
                             <td>$returnEntity->val4</td>
                         </tr>
 
                         <tr>
-                            <th>Average Rating: </th>
+                            <th>John's Rating: </th>
                             <td>$returnEntity->val5</td>
                         </tr>
 
@@ -497,53 +590,48 @@ class RestaurantController{
             $result = $result .
             "<table class = 'Raters with the most diverse ratings'>
                         <tr>
-                            <th width = '75px' >Restaurant ID: </th>
-                            <td>$returnEntity->val1</td>
-                        </tr>
-                        
-                        <tr>
-                            <th>User ID: </th>
-                            <td>$returnEntity->val2</td>
-                        </tr>
-
-                        <tr>
-                            <th>Maximum difference: </th>
-                            <td>$returnEntity->val3</td>
-                        </tr>
-
-                        <tr>
                             <th>Rater Name: </th>
-                            <td>$returnEntity->val4</td>
+                            <td>$returnEntity->val1</td>
                         </tr>
 
                         <tr>
                             <th>Rater Type: </th>
-                            <td>$returnEntity->val5</td>
+                            <td>$returnEntity->val2</td>
+                        </tr>
+
+                        <tr>
+                            <th>Rater Email: </th>
+                            <td>$returnEntity->val3</td>
+                        </tr>
+
+                        <tr>
+                            <th>Date Rated: </th>
+                            <td>$returnEntity->val4</td>
                         </tr>
 
                         <tr>
                             <th>Restaurant Name: </th>
-                            <td>$returnEntity->val6</td>
+                            <td>$returnEntity->val5</td>
                         </tr>
 
                         <tr>
                             <th>Food Rating: </th>
-                            <td>$returnEntity->val7</td>
+                            <td>$returnEntity->val6</td>
                         </tr>
 
                         <tr>
                             <th>Mood Rating: </th>
-                            <td>$returnEntity->val8</td>
+                            <td>$returnEntity->val7</td>
                         </tr>
 
                         <tr>
                             <th>Price Rating: </th>
-                            <td>$returnEntity->val9</td>
+                            <td>$returnEntity->val8</td>
                         </tr>
 
                         <tr>
                             <th>Staff Rating: </th>
-                            <td>$returnEntity->val10</td>
+                            <td>$returnEntity->val9</td>
                         </tr>
 
     

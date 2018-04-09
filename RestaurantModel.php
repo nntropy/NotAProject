@@ -349,7 +349,7 @@ class RestaurantModel {
             $val2 = $row[1];
             $val3 = $row[2];
             
-            $value = new ReturnEntity($val1, $val2, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+            $value = new ReturnEntity($val1, $val2, $val3, -1, -1, -1, -1, -1, -1, -1, -1,
                                           -1, -1, -1, -1);
             
             array_push($valueArray, $value);
@@ -403,11 +403,11 @@ class RestaurantModel {
         $query = "SET search_path="."\"Project\"".";
                   SELECT A.ANAME, A.JOIN_DATE, A.REPUTATION, R.ANAME, rate_date, total, RTA.FOOD, RTA.MOOD
                   FROM (SELECT (T.FOOD + T.MOOD) AS total, T.AUSER_ID AS u_id, T.RESTAURANT_ID AS r_id, T.ADATE AS rate_date
-                        FROM RATING AS T) AS FM_RATING, RATER AS A, RESTAURANT AS R
+                        FROM RATING AS T) AS FM_RATING, RATER AS A, RESTAURANT AS R, RATING AS RTA
                         WHERE (total, r_id) IN (SELECT MAX(T2.FOOD + T2.MOOD), T2.RESTAURANT_ID 
                                                 FROM RATING AS T2
                                                 GROUP BY T2.RESTAURANT_ID)
-                        AND u_id = A.USER_ID AND r_id = R.RESTAURANT_ID           
+                        AND u_id = A.USER_ID AND r_id = R.RESTAURANT_ID AND RTA.RESTAURANT_ID = r_id AND RTA.AUSER_ID = u_id          
       
                   ORDER BY R.ANAME ASC";
 
@@ -421,8 +421,94 @@ class RestaurantModel {
             $val4 = $row[3];
             $val5 = $row[4];
             $val6 = $row[5];
+            $val7 = $row[6];
+            $val8 = $row[7];
+
             
-            $value = new ReturnEntity($val1, $val2, $val3, $val4, $val5, $val6, -1, -1, -1, -1, -1,
+            $value = new ReturnEntity($val1, $val2, $val3, $val4, $val5, $val6, $val7, $val8, -1, -1, -1,
+                                          -1, -1, -1, -1);
+            
+            array_push($valueArray, $value);
+        }
+        
+        //close connection
+        pg_close($dbconn);
+        return $valueArray;
+    }
+
+    function GetQueryL() {
+        require 'C:\Users\aidanocc\Mitchell\Model/Credentials.php';
+        $conn_string='host=www.eecs.uottawa.ca port=15432 dbname=mchat022 user=mchat022 password=M2rnay6gz9';
+        $dbconn =pg_connect($conn_string) or die("Connection failed");
+        $query = "SET search_path="."\"Project\"".";
+                  SELECT DISTINCT Y.ANAME, Y.JOIN_DATE, Y.REPTUATION, RT.ANAME, X.ADATE, X.FOOD, X.MOOD
+                  FROM  RATING AS X,
+                        RATER AS Y,
+                        RESTAURANT AS RT,
+                        (SELECT MAX(T2.FOOD) AS max_food, MAX(T2.MOOD) AS max_mood, T2.RESTAURANT_ID AS r_id
+                         FROM RATING AS T2
+                         GROUP BY T2.RESTAURANT_ID) AS N
+      
+                  WHERE Y.USER_ID = X.AUSER_ID AND RT.RESTAURANT_ID = r_id AND r_id = X.RESTAURANT_ID 
+                      AND (X.FOOD = max_food OR X.MOOD = max_mood)
+                  ORDER BY RT.ANAME, Y.ANAME ASC";
+
+        $result=pg_query($dbconn,$query) or die("Error in SQL query: ".pg_last_error());
+        $valueArray = array();
+        
+        while($row = pg_fetch_array($result)) {
+            $val1 = $row[0];
+            $val2 = $row[1];
+            $val3 = $row[2];
+            $val4 = $row[3];
+            $val5 = $row[4];
+            $val6 = $row[5];
+            $val7 = $row[6];
+            
+            $value = new ReturnEntity($val1, $val2, $val3, $val4, $val5, $val6, $val7, -1, -1, -1, -1,
+                                          -1, -1, -1, -1);
+            
+            array_push($valueArray, $value);
+        }
+        
+        //close connection
+        pg_close($dbconn);
+        return $valueArray;
+    }
+
+    function GetQueryM() {
+        require 'C:\Users\aidanocc\Mitchell\Model/Credentials.php';
+        $conn_string='host=www.eecs.uottawa.ca port=15432 dbname=mchat022 user=mchat022 password=M2rnay6gz9';
+        $dbconn =pg_connect($conn_string) or die("Connection failed");
+        $query = "SET search_path="."\"Project\"".";
+                  SELECT count_num AS number_of_ratings, A.ANAME, A.REPTUATION, T.ANAME
+                  FROM  (SELECT COUNT(R.AUSER_ID) AS count_num, R.RESTAURANT_ID AS r_id, R.AUSER_ID AS u_id
+                         FROM RATING AS R
+                         GROUP BY R.RESTAURANT_ID,R.AUSER_ID
+                         ORDER BY R.RESTAURANT_ID, R.AUSER_ID ASC) AS count_table_2,
+                        RATER AS A,
+                        RESTAURANT AS T
+    
+
+WHERE (count_num, r_id) IN (SELECT MAX(count_num), r_id
+                            FROM (SELECT COUNT(R.AUSER_ID) AS count_num,R.RESTAURANT_ID AS r_id, R.AUSER_ID AS u_id
+                                   FROM RATING AS R
+                                   GROUP BY R.RESTAURANT_ID,R.AUSER_ID
+                                   ORDER BY R.RESTAURANT_ID, R.AUSER_ID ASC) AS count_table
+                                 GROUP BY r_id)
+      AND A.USER_ID = u_id AND T.RESTAURANT_ID = r_id AND T.ANAME = ‘Little India Café’
+ORDER BY r_id, u_id";
+
+        $result=pg_query($dbconn,$query) or die("Error in SQL query: ".pg_last_error());
+        $valueArray = array();
+        
+        while($row = pg_fetch_array($result)) {
+            $val1 = $row[0];
+            $val2 = $row[1];
+            $val3 = $row[2];
+            $val4 = $row[3];
+            
+            $value = new ReturnEntity($val1, $val2, $val3, $val4,-1, -1, -1, -1, -1, -1, -1,
                                           -1, -1, -1, -1);
             
             array_push($valueArray, $value);
@@ -479,7 +565,7 @@ class RestaurantModel {
         $conn_string='host=www.eecs.uottawa.ca port=15432 dbname=mchat022 user=mchat022 password=M2rnay6gz9';
         $dbconn =pg_connect($conn_string) or die("Connection failed");
         $query = "SET search_path="."\"Project\"".";
-                  SELECT DISTINCT r_id, u_id, maximum_difference, O.ANAME, O.ATYPE, O.EMAIL, RE.ANAME, O.FOOD, O.MOOD, O.PRICE, O.STAFF 
+                  SELECT DISTINCT O.ANAME, O.ATYPE, O.EMAIL, O.ADATE, RE.ANAME, O.FOOD, O.MOOD, O.PRICE, O.STAFF 
                   FROM (SELECT r_id, u_id, MAX(TOTAL) as maximum_difference
                         FROM (SELECT r_id, u_id, ((SUM(ABS(avg_food - curr_food))) + (SUM(ABS(avg_mood - curr_mood)))
                                      + (SUM(ABS(avg_price - curr_price))) + (SUM(ABS(avg_staff - curr_staff)))) AS TOTAL
@@ -518,10 +604,8 @@ class RestaurantModel {
             $val7 = $row[6];
             $val8 = $row[7];
             $val9 = $row[8];
-            $val10 = $row[9];
-            $val11 = $row[10];
             
-            $value = new ReturnEntity($val1, $val2, $val3, $val4, $val5, $val6, $val7, $val8, $val9, $val10, $val11
+            $value = new ReturnEntity($val1, $val2, $val3, $val4, $val5, $val6, $val7, $val8, $val9, -1, -1
                                           -1, -1, -1, -1);
             
             array_push($valueArray, $value);
