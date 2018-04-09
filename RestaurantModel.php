@@ -144,7 +144,7 @@ class RestaurantModel {
         $conn_string='host=www.eecs.uottawa.ca port=15432 dbname=mchat022 user=mchat022 password=M2rnay6gz9';
         $dbconn =pg_connect($conn_string) or die("Connection failed");
         $query = "SET search_path="."\"Project\"".";
-                  SELECT M.manager_name, M.opendate
+                  SELECT R.ANAME, M.manager_name, M.opendate
                   FROM ALOCATION AS M, RESTAURANT AS R 
                   WHERE R.ATYPE = '$category' AND M.restaurant_id = R.restaurant_id
                   ORDER BY OPENDATE ASC";
@@ -154,8 +154,9 @@ class RestaurantModel {
         while($row = pg_fetch_array($result)) {
             $val1 = $row[0];
             $val2 = $row[1];
+            $val3 = $row[2];
             
-            $value = new ReturnEntity($val1, $val2, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+            $value = new ReturnEntity($val1, $val2, $val3, -1, -1, -1, -1, -1, -1, -1, -1,
                                           -1, -1, -1, -1);
             
             array_push($valueArray, $value);
@@ -173,9 +174,9 @@ class RestaurantModel {
         $query = "SET search_path="."\"Project\"".";
                   SELECT M.aname, M.price, A.manager_name, A.open_hour, R.url
                   FROM MENUITEM AS M, RESTAURANT AS R, ALOCATION AS A
-                  WHERE R.ANAME = VARIABLE AND A.restaurant_id = R.restaurant_id
+                  WHERE R.ANAME = '$category' AND A.restaurant_id = R.restaurant_id AND M.RESTAURANT_ID = R.RESTAURANT_ID
                         AND M.price = (SELECT MAX(M2.price)
-                                       FROM "Project".MENUITEM AS M2
+                                       FROM MENUITEM AS M2
                                        WHERE M2.restaurant_id = R.restaurant_id)";
         $result=pg_query($dbconn,$query) or die("Error in SQL query: ".pg_last_error());
         $valueArray = array();
@@ -205,7 +206,7 @@ class RestaurantModel {
         $dbconn =pg_connect($conn_string) or die("Connection failed");
         $query = "SET search_path="."\"Project\"".";
                   SELECT R.ATYPE, M.CATEGORY, AVG(M.PRICE)
-                  FROM "Project".MENUITEM AS M, "Project".RESTAURANT AS R
+                  FROM MENUITEM AS M, RESTAURANT AS R
                   WHERE M.RESTAURANT_ID = R.RESTAURANT_ID
                   GROUP BY R.ATYPE, M.CATEGORY
                   ORDER BY R.ATYPE ASC";
@@ -233,7 +234,7 @@ class RestaurantModel {
         $conn_string='host=www.eecs.uottawa.ca port=15432 dbname=mchat022 user=mchat022 password=M2rnay6gz9';
         $dbconn =pg_connect($conn_string) or die("Connection failed");
         $query = "SET search_path="."\"Project\"".";
-                  SELECT DISTINCT R2.ANAME, R2.RESTAURANT_ID, M2.ANAME, M2.USER_ID, T2.PRICE, T2.FOOD, T2.MOOD, T2.STAFF 
+                  SELECT DISTINCT R2.ANAME, M2.ANAME, T2.ADATE, T2.PRICE, T2.FOOD, T2.MOOD, T2.STAFF 
                   FROM (SELECT R.RESTAURANT_ID AS r_id, T.AUSER_ID AS u_id
                         FROM RESTAURANT AS R, RATER AS M, RATING AS T
                         WHERE R.RESTAURANT_ID = T.RESTAURANT_ID AND M.USER_ID = T.AUSER_ID
@@ -244,7 +245,7 @@ class RestaurantModel {
                         RATER AS M2,
                         RATING AS T2
                   WHERE r_id = R2.RESTAURANT_ID AND M2.USER_ID = u_id AND T2.AUSER_ID = u_id AND T2.RESTAURANT_ID = r_id
-                  ORDER BY M2.USER_ID";
+                  ORDER BY R2.ANAME, M2.ANAME ASC";
         $result=pg_query($dbconn,$query) or die("Error in SQL query: ".pg_last_error());
         $valueArray = array();
         
@@ -256,9 +257,8 @@ class RestaurantModel {
             $val5 = $row[4];
             $val6 = $row[5];
             $val7 = $row[6];
-            $val8 = $row[7];
             
-            $value = new ReturnEntity($val1, $val2, $val3, $val4, $val5, $val6, $val7, $val8, -1, -1, -1,
+            $value = new ReturnEntity($val1, $val2, $val3, $val4, $val5, $val6, $val7, -1, -1, -1, -1,
                                           -1, -1, -1, -1);
             
             array_push($valueArray, $value);
@@ -277,9 +277,9 @@ class RestaurantModel {
                   SELECT DISTINCT E.ANAME, L.PHONE_NUMBER, E.ATYPE
                   FROM RATING AS R, RESTAURANT AS E, ALOCATION AS L
                   WHERE L.RESTAURANT_ID = E.RESTAURANT_ID AND R.RESTAURANT_ID = E.RESTAURANT_ID 
-                        AND R.RESTAURANT_ID IN (SELECT DISTINCT RESTAURANT_ID
+                        AND R.RESTAURANT_ID NOT IN (SELECT DISTINCT RESTAURANT_ID
                                                 FROM RATING AS R
-                                                WHERE EXTRACT(YEAR FROM R.ADATE) != 2015 OR EXTRACT(MONTH FROM R.ADATE) != 01)
+                                                WHERE EXTRACT(YEAR FROM R.ADATE) = 2015 OR EXTRACT(MONTH FROM R.ADATE) = 01)
                   ORDER BY E.ANAME ASC";
         $result=pg_query($dbconn,$query) or die("Error in SQL query: ".pg_last_error());
         $valueArray = array();
@@ -335,7 +335,7 @@ class RestaurantModel {
         $conn_string='host=www.eecs.uottawa.ca port=15432 dbname=mchat022 user=mchat022 password=M2rnay6gz9';
         $dbconn =pg_connect($conn_string) or die("Connection failed");
         $query = "SET search_path="."\"Project\"".";
-                  SELECT R.ANAME, A.ANAME
+                  SELECT R.ANAME, A.ANAME, T.FOOD
                   FROM RESTAURANT AS R, RATING AS T, RATER AS A
                   WHERE R.RESTAURANT_ID = T.RESTAURANT_ID AND A.USER_ID = T.AUSER_ID AND R.ATYPE = 'Thai'
                   AND T.FOOD = (SELECT MAX(T2.FOOD)
@@ -347,6 +347,7 @@ class RestaurantModel {
         while($row = pg_fetch_array($result)) {
             $val1 = $row[0];
             $val2 = $row[1];
+            $val3 = $row[2];
             
             $value = new ReturnEntity($val1, $val2, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                                           -1, -1, -1, -1);
@@ -400,7 +401,7 @@ class RestaurantModel {
         $conn_string='host=www.eecs.uottawa.ca port=15432 dbname=mchat022 user=mchat022 password=M2rnay6gz9';
         $dbconn =pg_connect($conn_string) or die("Connection failed");
         $query = "SET search_path="."\"Project\"".";
-                  SELECT A.ANAME, A.JOIN_DATE, A.REPUTATION, R.ANAME, rate_date, total
+                  SELECT A.ANAME, A.JOIN_DATE, A.REPUTATION, R.ANAME, rate_date, total, RTA.FOOD, RTA.MOOD
                   FROM (SELECT (T.FOOD + T.MOOD) AS total, T.AUSER_ID AS u_id, T.RESTAURANT_ID AS r_id, T.ADATE AS rate_date
                         FROM RATING AS T) AS FM_RATING, RATER AS A, RESTAURANT AS R
                         WHERE (total, r_id) IN (SELECT MAX(T2.FOOD + T2.MOOD), T2.RESTAURANT_ID 
