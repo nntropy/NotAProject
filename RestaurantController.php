@@ -160,13 +160,18 @@ class RestaurantController{
             $result = $result .
             "<table class = 'Managers and Opening Dates'>
                         <tr>
-                            <th width = '75px' >Manager Name: </th>
+                            <th width = '75px' >Restaurant Name: </th>
                             <td>$returnEntity->val1</td>
+                        </tr>
+
+                        <tr>
+                            <th width = '75px' >Manager Name: </th>
+                            <td>$returnEntity->val2</td>
                         </tr>
                         
                         <tr>
                             <th>Opening Date: </th>
-                            <td>$returnEntity->val2</td>
+                            <td>$returnEntity->val3</td>
                         </tr>
     
                      </table>";
@@ -255,38 +260,33 @@ class RestaurantController{
                         </tr>
                         
                         <tr>
-                            <th>Restaurant ID: </th>
+                            <th>Rater Name: </th>
                             <td>$returnEntity->val2</td>
                         </tr>
 
                         <tr>
-                            <th>Rater Name: </th>
+                            <th>Date Rated: </th>
                             <td>$returnEntity->val3</td>
                         </tr>
 
                         <tr>
-                            <th>Rater ID: </th>
+                            <th>Price Rating: </th>
                             <td>$returnEntity->val4</td>
                         </tr>
 
                         <tr>
-                            <th>Price Rating: </th>
+                            <th>Food Rating: </th>
                             <td>$returnEntity->val5</td>
                         </tr>
 
                         <tr>
-                            <th>Food Rating: </th>
+                            <th>Mood Rating: </th>
                             <td>$returnEntity->val6</td>
                         </tr>
 
                         <tr>
-                            <th>Mood Rating: </th>
-                            <td>$returnEntity->val7</td>
-                        </tr>
-
-                        <tr>
                             <th>Staff Rating: </th>
-                            <td>$returnEntity->val8</td>
+                            <td>$returnEntity->val7</td>
                         </tr>
 
 
@@ -370,6 +370,11 @@ class RestaurantController{
                         <tr>
                             <th>Rater Name: </th>
                             <td>$returnEntity->val2</td>
+                        </tr>
+
+                        <tr>
+                            <th>Food Rating: </th>
+                            <td>$returnEntity->val3</td>
                         </tr>
 
     
